@@ -1,0 +1,29 @@
+{
+  "name": "wdm-server",
+  "version": "1.0.0",
+  "description": "Wound Documentation Management REST API server",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AmrARaouf/WDM-server.git"
+  },
+  "author": "Amr Abdelraouf",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AmrARaouf/WDM-server/issues"
+  },
+  "homepage": "https://github.com/AmrARaouf/WDM-server#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mongodb": "^2.2.28",
+    "mongoose": "^4.10.5"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
