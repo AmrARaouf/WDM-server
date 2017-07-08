@@ -1,8 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
+<<<<<<< HEAD
 const multer = require('multer');
 const upload = multer({ dest: './uploads' });
+const cors = require('cors')
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/WDMDB');
@@ -14,6 +16,7 @@ const woundController = require('./models/wound/woundController')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}))
+app.use(cors())
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html')
