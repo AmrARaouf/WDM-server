@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
-<<<<<<< HEAD
 const multer = require('multer');
 const upload = multer({ dest: './uploads' });
 const cors = require('cors')
@@ -29,7 +28,7 @@ app.get('/hello', (req, res) => {
 app.get('/patient/:id', patientController.getPatient)
 app.get('/patient', patientController.getAllPatients)
 app.post('/patient', patientController.createPatient)
-app.post('/patient/:id/wound', upload.single('img'), woundController.createWound)
+app.post('/submit', upload.any(), woundController.createWounds)
 
 app.listen(3000, () => {
   console.log('listening on 3000')
