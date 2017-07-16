@@ -13,7 +13,7 @@ exports.createPatient = function(req, res) {
 
   newPatient.save(function(error, savedPatient) {
     if (error) return res.json({ error: error });
-    else return res.json({ patient: savedPatient })
+    else return res.json({ patient: savedPatient });
   });
 }
 
@@ -22,15 +22,23 @@ exports.getPatient = function(req, res) {
     return res.json({ error: "format error" });
   }
 
-  var patient = Patient.findById(req.params.id, function(error, patient) {
-    if (error) return res.json({ error: error })
-    else return res.json({ patient: patient })
+  var patient = Patient.findById(req.params.id)
+  .populate({ 
+     path: 'wounds',
+     populate: {
+       path: 'documentations',
+       model: 'Documentation'
+     } 
   })
+  .exec(function (error, patient) {
+    if (error) return res.json({ error: error });
+    else return res.json({ patient: patient });
+});
 }
 
 exports.getAllPatients = function(req, res) {
   var patients = Patient.find({}, function(error, patients) {
-    if (error) return res.json({ error: error })
-    else return res.json({ patients: patients })
+    if (error) return res.json({ error: error });
+    else return res.json({ patients: patients });
   })
 }

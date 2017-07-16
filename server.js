@@ -15,20 +15,20 @@ const woundController = require('./models/wound/woundController')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}))
-app.use(cors())
+//app.use(cors())
 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html')
-})
-
-app.get('/hello', (req, res) => {
-  res.send("hi")
-})
+app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+  res.setHeader('Access-Control-Allow-Methods', 'POST');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  next();
+});
 
 app.get('/patient/:id', patientController.getPatient)
 app.get('/patient', patientController.getAllPatients)
 app.post('/patient', patientController.createPatient)
-app.post('/submit', upload.any(), woundController.createWounds)
+app.post('/wounds', upload.any(), woundController.createWounds)
 
 app.listen(3000, () => {
   console.log('listening on 3000')
