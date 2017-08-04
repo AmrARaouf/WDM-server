@@ -37,6 +37,7 @@ exports.getPatient = function(req, res) {
 }
 
 exports.getAllPatients = function(req, res) {
+  console.log("getting all patients");
   var patients = Patient.find({}, function(error, patients) {
     if (error) return res.json({ error: error });
     else return res.json({ patients: patients });

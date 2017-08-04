@@ -2,7 +2,9 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var woundSchema = mongoose.Schema({
-    position: { type: String, required: true },
+    position: { type: Number },
+    type: String,
+    reason: String,
     documentations: [{ type: Schema.Types.ObjectId, ref: 'Documentation' }]
 });
 

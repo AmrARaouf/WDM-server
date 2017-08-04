@@ -8,6 +8,7 @@ var ExifImage = require('exif').ExifImage;
 
 
 exports.createWounds =  function(req, res, next) {
+  console.log("hello for");
   for(var i=0; i<req.files.length; i++){
     var f = req.files[i];
     console.log(f);
@@ -15,7 +16,7 @@ exports.createWounds =  function(req, res, next) {
     console.log(file_details);
     var date_details = file_details[1].split('-');
     var docs = new Documentation({
-      date:new Date(date_details[0], date_details[1], date_details[2], date_details[3], date_details[4], date_details[5]),
+      date:new Date('20'+date_details[0], date_details[1]-1, date_details[2], date_details[3], date_details[4], date_details[5]),
       length:file_details[2],
       width:file_details[3]
     })
