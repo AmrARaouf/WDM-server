@@ -20,7 +20,7 @@ exports.createWounds =  function(req, res, next) {
     var newWound = new Wound({
       position: file_details[4].split('.')[0],
     });
-    docs.img.data = fs.readFileSync(f.path)
+    docs.img = f.path;
     docs.img.contentType = 'image/png';
     docs.save(function(error, savedDocs) {  
       if (error) return res.json({ error: error });

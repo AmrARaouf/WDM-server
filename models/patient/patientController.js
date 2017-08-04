@@ -38,7 +38,10 @@ exports.getPatient = function(req, res) {
   })
   .exec(function (error, patient) {
     if (error) return res.json({ error: error });
-    else return res.json({ patient: patient });
+    else{ 
+      console.log(patient);
+      return res.json({ patient: patient });
+    }
 });
 }
 

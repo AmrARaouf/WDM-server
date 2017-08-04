@@ -13,6 +13,7 @@ const app = express();
 const patientController = require('./models/patient/patientController')
 const woundController = require('./models/wound/woundController')
 
+app.use(express.static('./'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
@@ -31,7 +32,7 @@ app.get('/', function(req, res){
 app.get('/patient/:id', patientController.getPatient)
 app.get('/patient', patientController.getAllPatients)
 app.post('/patient', patientController.createPatient)
-app.post('/wounds', upload.any(), woundController.createWounds)
+app.post('/wound', upload.any(), woundController.createWounds)
 
 app.listen(3000, () => {
   console.log('listening on 3000')
