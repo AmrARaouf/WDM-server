@@ -1,14 +1,20 @@
 var Patient = require('./patientModel')
 
 exports.createPatient = function(req, res) {
-  if (!req.body.name || !req.body.birthdate) {
+  if (!req.body.lastName || !req.body.firstName
+    || !req.body.birthdate || !req.body.address
+    ||!req.body.creationDate || !req.body.reference) {
     // TODO: add error function
     return res.json({ error: "format error" });
   }
       
   var newPatient = new Patient({
-    name: req.body.name,
-    birthdate: new Date(req.body.birthdate)
+    lastName: req.body.lastName,
+    firstName: req.body.firstName,
+    birthdate: new Date(req.body.birthdate),
+    address: req.body.address,
+    creationDate: new Date(req.body.creationDate),
+    reference: req.body.reference
   });
 
   newPatient.save(function(error, savedPatient) {

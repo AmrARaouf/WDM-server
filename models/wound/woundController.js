@@ -1,10 +1,7 @@
 var Wound = require('./woundModel')
 var Patient = require('../patient/patientModel')
 var Documentation = require('../documentation/documentationModel')
-var imageinfo = require('crafity-imageinfo');
 var fs = require('fs');
-var ExifImage = require('exif').ExifImage;
-
 
 
 exports.createWounds =  function(req, res, next) {
