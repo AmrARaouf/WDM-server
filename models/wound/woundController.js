@@ -18,8 +18,40 @@ exports.getWound = function(req, res) {
       console.log(wound);
       return res.json({ wound: wound });
     }
-});
+  });
 }
+
 exports.createWound = function(req, res) {
-  return res.json({ error: "format error" });
+  if (!req.body.patientId || !req.body.wound
+    || !req.body.wound.type || !req.body.wound.reason || !req.body.wound.position) {
+    return res.status(400).send("Input format error");
+  } else {
+    Patient.findById(req.body.patientId, function(error, patient) {
+      if (error) {
+        return res.status(404).send("Patient not found");
+      } else {
+        var newWound = new Wound({
+          position: req.body.wound.position,
+          type: req.body.wound.type,
+          reason: req.body.wound.reason
+        });
+
+        newWound.save(function(error, savedWound) {
+          if (error) {
+            return res.status(500).send("Error saving new wound");
+          } else {
+            patient.wounds.push(savedWound);
+            patient.save(function (error, savedPatient) {
+              if (error) {
+                return res.status(500).send("Error saving patient after adding new wound");
+              } else {
+                return res.json({ wound: savedWound });
+              }
+            })
+          }
+        })
+      }
+    })
+  }
+  
 }
