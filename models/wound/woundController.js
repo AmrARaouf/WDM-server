@@ -3,6 +3,7 @@ var Patient = require('../patient/patientModel')
 var Documentation = require('../documentation/documentationModel')
 
 exports.getWound = function(req, res) {
+  console.log("wound for:" +req.params.id)
   if (!req.params.id) {
     return res.json({ error: "format error" });
   }
