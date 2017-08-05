@@ -32,6 +32,7 @@ app.get('/', function(req, res){
 app.get('/patient/:id', patientController.getPatient)
 app.get('/patient', patientController.getAllPatients)
 app.post('/patient', patientController.createPatient)
+app.get('/wound/:id', woundController.getWound)
 app.post('/wound', upload.any(), woundController.createWounds)
 
 app.listen(3000, () => {
