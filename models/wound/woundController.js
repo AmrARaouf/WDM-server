@@ -20,3 +20,6 @@ exports.getWound = function(req, res) {
     }
 });
 }
+exports.createWound = function(req, res) {
+  return res.json({ error: "format error" });
+}

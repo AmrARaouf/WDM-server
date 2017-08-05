@@ -12,7 +12,7 @@ const app = express();
 
 const patientController = require('./models/patient/patientController')
 const woundController = require('./models/wound/woundController')
-const woundController = require('./models/documentation/documentationController')
+const documentationController = require('./models/documentation/documentationController')
 
 app.use(express.static('./'));
 app.use(bodyParser.json());
