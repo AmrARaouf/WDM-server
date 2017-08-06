@@ -36,6 +36,8 @@ app.post('/patient', patientController.createPatient)
 app.get('/wound/:id', woundController.getWound)
 app.post('/wound', woundController.createWound)
 app.post('/documentation', upload.any(), documentationController.createDocumentation)
+app.get('/documentation/:id', documentationController.getDocumentation)
+app.post('/documentation/:id', documentationController.editDocumentation)
 
 app.listen(3000, () => {
   console.log('listening on 3000')
