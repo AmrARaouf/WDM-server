@@ -54,26 +54,29 @@ exports.getDocumentation = function(req, res) {
 }
 
 exports.editDocumentation = function(req, res) {
-  if (!req.params.id || !req.body.color || !req.body.exsudat || !req.body.comment
-    || !req.body.edge || !req.body.symptoms || !req.body.assessment) {
+  if (!req.params.id || !req.body.documentation.affectedTissue || !req.body.documentation.color || !req.body.documentation.exsudat || !req.body.documentation.comment
+    || !req.body.documentation.edge || !req.body.documentation.symptoms || !req.body.documentation.assessment) {
     return res.status(400).send("Input format error, missing parameters");
   } else {
+    console.log(req.params.id);
     Documentation.findById(req.params.id, function(error, documentation) {
       if (error) {
         return res.status(404).send("documentation not found");
       } else {
-        documentation.color = req.body.color;
-        documentation.exsudat = req.body.exsudat;
-        documentation.comment = req.body.comment;
-        documentation.edge = req.body.edge;
-        documentation.symptoms = req.body.symptoms;
-        documentation.assessment = req.body.assessment;
+        documentation.affectedTissue = req.body.documentation.affectedTissue;
+        documentation.color = req.body.documentation.color;
+        documentation.exsudat = req.body.documentation.exsudat;
+        documentation.comment = req.body.documentation.comment;
+        documentation.edge = req.body.documentation.edge;
+        documentation.symptoms = req.body.documentation.symptoms;
+        documentation.assessment = req.body.documentation.assessment;
 
         documentation.save(function(error, savedDocumentation) {
           if (error) {
+            console.log(error);
             return res.status(500).send("Error saving new documentation");
           } else {
-                return res.json({ wound: savedWound });
+                return res.json({ documentation: savedDocumentation });
           }
         })
       }
