@@ -47,15 +47,20 @@ exports.getDocumentation = function(req, res) {
   .exec(function (error, documentation) {
     if (error) return res.json({ error: error });
     else{ 
-      console.log(documentation);
       return res.json({ documentation: documentation });
     }
 });
 }
 
 exports.editDocumentation = function(req, res) {
-  if (!req.params.id || !req.body.documentation.affectedTissue || !req.body.documentation.color || !req.body.documentation.exsudat || !req.body.documentation.comment
-    || !req.body.documentation.edge || !req.body.documentation.symptoms || !req.body.documentation.assessment) {
+  if (!req.params.id 
+    || !req.body.documentation.affectedTissue 
+    || !req.body.documentation.color 
+    || !req.body.documentation.exsudat 
+    || !req.body.documentation.comment
+    || !req.body.documentation.edge 
+    || !req.body.documentation.symptoms 
+    || !req.body.documentation.assessment) {
     return res.status(400).send("Input format error, missing parameters");
   } else {
     console.log(req.params.id);
@@ -82,4 +87,40 @@ exports.editDocumentation = function(req, res) {
       }
     })
   }
+}
+
+exports.getDocumentationNotifications = function(req, res) {
+  docs = [];
+  Patient.find({})
+  .populate({ 
+     path: 'wounds',
+     populate: {
+       path: 'documentations',
+       model: 'Documentation'
+     } 
+  }).exec(function(error, patients) {
+  if (error){ 
+      return res.status(404).send("no patients found");
+  } else {
+    for (var i = 0; patients && i < patients.length; i++) {
+      for(var j = 0; patients[i].wounds && j < patients[i].wounds.length; j++){        
+        var wound = patients[i].wounds[j];
+        for(var k = 0; wound && wound.documentations && k < wound.documentations.length; k++){
+          var documentation = wound.documentations[k];
+          if(!documentation.affectedTissue 
+            || !documentation.color 
+            || !documentation.exsudat 
+            || !documentation.comment
+            || !documentation.edge 
+            || !documentation.symptoms 
+            || !documentation.assessment){
+              docs.push({ documentation: documentation, patientId: patients[i]._id, woundId: wound._id });
+          }
+        }
+      }
+    }
+  }
+  console.log("got "+docs.length +" notifications");
+  return res.json({ notifications: docs });
+  });
 }
