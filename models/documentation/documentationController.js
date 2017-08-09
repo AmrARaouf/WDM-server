@@ -25,7 +25,7 @@ exports.createDocumentation =  function(req, res, next) {
           docs.save(function(error, savedDocs) {  
             if (error) return res.json({ error: error });
             else{
-              console.log(wound);
+              console.log("created docs for wound:"+wound);
               wound.documentations.push(savedDocs);
               wound.save(function(error, savedWound) {
                 if (error) return res.json({ error: error });
@@ -114,7 +114,7 @@ exports.getDocumentationNotifications = function(req, res) {
             || !documentation.edge 
             || !documentation.symptoms 
             || !documentation.assessment){
-              docs.push({ documentation: documentation, patientId: patients[i]._id, woundId: wound._id });
+              docs.push({ documentation: documentation, patient: patients[i], wound: wound });
           }
         }
       }
