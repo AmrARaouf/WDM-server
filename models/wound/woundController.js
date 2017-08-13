@@ -57,5 +57,27 @@ exports.createWound = function(req, res) {
       }
     })
   }
-  
+}
+
+exports.editWound = function(req, res) {
+  if (!req.body.wound || !req.body.wound.type || !req.body.wound.reason || !req.body.wound.position) {
+    return res.status(400).send("Input format error");
+  } else {
+    Wound.findById(req.params.id, function(error, wound) {
+      if (error) {
+        return res.status(404).send("Wound not found");
+      } else {
+        wound.type = req.body.wound.type;
+        wound.reason = req.body.wound.reason;
+        wound.position = req.body.wound.position;
+        wound.save(function(error, savedWound) {
+          if (error) {
+            return res.status(500).send("Error saving updated wound");
+          } else {
+            return res.json({ wound: savedWound });
+          }
+        });
+      }
+    });
+  }
 }

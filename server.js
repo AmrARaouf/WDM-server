@@ -30,14 +30,19 @@ app.use(function (req, res, next) {
 app.get('/', function(req, res){
     console.log("connection worked");
 })
+
 app.get('/patient/:id', patientController.getPatient)
 app.get('/patient', patientController.getAllPatients)
 app.post('/patient', patientController.createPatient)
+
 app.get('/wound/:id', woundController.getWound)
 app.post('/wound', woundController.createWound)
-app.post('/documentation', upload.any(), documentationController.createDocumentation)
+app.put('/wound/:id', woundController.editWound)
+
 app.get('/documentation/:id', documentationController.getDocumentation)
+app.post('/documentation', upload.any(), documentationController.createDocumentation)
 app.post('/documentation/:id', documentationController.editDocumentation)
+
 app.get('/notifications', documentationController.getDocumentationNotifications)
 
 app.listen(3000, () => {
