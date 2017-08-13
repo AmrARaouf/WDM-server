@@ -72,7 +72,7 @@ exports.editDocumentation = function(req, res) {
         documentation.color = req.body.documentation.color;
         documentation.exsudat = req.body.documentation.exsudat;
         documentation.comment = req.body.documentation.comment;
-        documentation.edge = req.body.documentation.edge;
+        documentation.edges = req.body.documentation.edges;
         documentation.symptoms = req.body.documentation.symptoms;
         documentation.assessment = req.body.documentation.assessment;
 
@@ -111,7 +111,7 @@ exports.getDocumentationNotifications = function(req, res) {
             || !documentation.color 
             || !documentation.exsudat 
             || !documentation.comment
-            || !documentation.edge 
+            || !documentation.edges 
             || !documentation.symptoms 
             || !documentation.assessment){
               docs.push({ documentation: documentation, patient: patients[i], wound: wound });

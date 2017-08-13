@@ -8,7 +8,7 @@ var documentationSchema = mongoose.Schema({
     affectedTissue: Number,
     color: Number,
     exsudat: Number,
-    edge: [ String ],
+    edges: [ String ],
     symptoms: [ String ],
     assessment: Number,
     comment: String,
