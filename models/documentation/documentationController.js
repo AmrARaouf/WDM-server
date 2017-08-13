@@ -58,7 +58,7 @@ exports.editDocumentation = function(req, res) {
     || !req.body.documentation.color 
     || !req.body.documentation.exsudat 
     || !req.body.documentation.comment
-    || !req.body.documentation.edge 
+    || !req.body.documentation.edges 
     || !req.body.documentation.symptoms 
     || !req.body.documentation.assessment) {
     return res.status(400).send("Input format error, missing parameters");

@@ -5,12 +5,12 @@ var documentationSchema = mongoose.Schema({
     date: { type: Date, required: true },
     length: { type: Number, required: true },
     width: { type: Number, required: true },
-    affectedTissue: String,
-    color: String,
-    exsudat: String,
+    affectedTissue: Number,
+    color: Number,
+    exsudat: Number,
     edge: [ String ],
     symptoms: [ String ],
-    assessment : String,
+    assessment: Number,
     comment: String,
     img: String
 });
