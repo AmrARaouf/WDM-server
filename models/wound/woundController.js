@@ -10,8 +10,11 @@ exports.getWound = function(req, res) {
 
   var wound = Wound.findById(req.params.id)
   .populate({
-       path: 'documentations',
-       model: 'Documentation'
+      path: 'documentations',
+      model: 'Documentation',
+      options: { 
+        sort: { 'date': -1 }
+      }
      })
   .exec(function (error, wound) {
     if (error) return res.json({ error: error });
