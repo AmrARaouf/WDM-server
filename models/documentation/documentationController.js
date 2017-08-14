@@ -107,9 +107,6 @@ exports.getDocumentationNotifications = function(req, res) {
           if(!documentation.affectedTissue 
             || !documentation.color 
             || !documentation.exsudat 
-            || !documentation.comment
-            || !documentation.edges 
-            || !documentation.symptoms 
             || !documentation.assessment){
               docs.push({ documentation: documentation, patient: patients[i], wound: wound });
           }
