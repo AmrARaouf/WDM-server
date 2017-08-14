@@ -56,10 +56,7 @@ exports.editDocumentation = function(req, res) {
   if (!req.params.id 
     || !req.body.documentation.affectedTissue 
     || !req.body.documentation.color 
-    || !req.body.documentation.exsudat 
-    || !req.body.documentation.comment
-    || !req.body.documentation.edges 
-    || !req.body.documentation.symptoms 
+    || !req.body.documentation.exsudat
     || !req.body.documentation.assessment) {
     return res.status(400).send("Input format error, missing parameters");
   } else {
